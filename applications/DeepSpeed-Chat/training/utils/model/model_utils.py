@@ -22,7 +22,10 @@ def create_hf_model(model_class,
                     ds_config=None,
                     rlhf_training=False,
                     disable_dropout=False):
-    model_config = AutoConfig.from_pretrained(model_name_or_path)
+    access_token = "" # add correct access token
+    model_config = AutoConfig.from_pretrained(model_name_or_path,
+                                    token=access_token,
+                                    trust_remote_code=True)
     if disable_dropout:
         model_config.dropout = 0.0
     # Note: dschf is defined in function scope to avoid global effects
@@ -37,6 +40,7 @@ def create_hf_model(model_class,
     else:
         model = model_class.from_pretrained(
             model_name_or_path,
+            token=access_token,
             from_tf=bool(".ckpt" in model_name_or_path),
             config=model_config)
 
