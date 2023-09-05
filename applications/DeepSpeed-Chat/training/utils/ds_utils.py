@@ -63,6 +63,12 @@ def get_train_ds_config(offload,
             "enabled": enable_tensorboard,
             "output_path": f"{tb_path}/ds_tensorboard_logs/",
             "job_name": f"{tb_name}_tensorboard"
+        },
+          "wandb": {
+            "enabled": True,
+            # "team": "my_team",
+            # "group": "my_group",
+            "project": "tpc"
         }
     }
 
